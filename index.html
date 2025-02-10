@@ -84,6 +84,58 @@
             padding: 20px;
         }
 
+        .card-container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            perspective: 1000px;
+            margin: auto;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+        }
+
+        .card.open {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-front {
+            background: linear-gradient(45deg, #FFD700, #FFB347);
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .card-back {
+            background: white;
+            color: #ff3366;
+            text-align: center;
+            padding: 20px;
+            font-family: 'Brush Script MT', cursive;
+            font-size: 20px;
+            transform: rotateY(180deg);
+            border: 2px solid #FFD700;
+        }
+
         /* Photo Gallery */
         .photo-gallery {
             display: grid;
