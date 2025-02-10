@@ -201,6 +201,10 @@
         }
 
         addConfetti();
+        // Start music on first interaction
+        document.addEventListener('click', () => {
+            music.play();
+        }, { once: true });
     </script>
 </body>
 </html>
