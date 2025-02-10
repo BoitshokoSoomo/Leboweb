@@ -234,20 +234,7 @@
         const music = document.getElementById('background-music');
 
         document.addEventListener('click', (e) => {
-            const clickPosition = e.clientX / window.innerWidth;
-
-            if (currentPage < pages.length - 1 && clickPosition > 0.5) {
-                pages[currentPage].classList.add('flip');
-                pages[currentPage].classList.remove('active');
-                currentPage++;
-                pages[currentPage].classList.add('active');
-            } else if (currentPage > 0 && clickPosition < 0.5) {
-                pages[currentPage].classList.remove('active');
-                currentPage--;
-                pages[currentPage].classList.remove('flip');
-                pages[currentPage].classList.add('active');
-            }
-        });
+            const clickPosition = e.clientX / window.innerWidth;});
 
         function flipPage(pageNumber) {
             if (pageNumber <= currentPage) return;
