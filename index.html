@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love! ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffe6e6;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .book {
+            position: relative;
+            width: 80vw;
+            height: 70vh;
+            perspective: 1500px;
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .cover {
+            background: #ff3366;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .cover h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-family: 'Pacifico', cursive;
+        }
+
+        .page-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .active {
+            display: block;
+            opacity: 1;
+        }
+
+        .letter {
+            font-size: 1.2em;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .photo-gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 3px solid #ff3366;
+        }
+
+        .flipped {
+            transform: rotateY(-180deg);
+        }
+
+        .heart {
+            font-size: 50px;
+            animation: heartbeat 1s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #ff3366;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="book">
+        <!-- Cover Page -->
+        <div class="page cover active" onclick="flipPage(1)">
+            <h1>Happy Birthday, My Love! ❤️</h1>
+            <p>Click to open your special gift</p>
+            <div class="heart">🎁</div>
+        </div>
+
+        <!-- Page 1 - Letter -->
+        <div class="page" id="page1">
+            <div class="page-content">
+                <div class="letter">
+                    <h2>To My Beautiful Girlfriend,</h2>
+                    <p>Happy birthday to the most amazing person in my life! 🎉</p>
+                    <p>Every day with you feels like a blessing. Your smile lights up my world, and your love fills my heart with joy. Today is all about celebrating you - the wonderful, kind, and beautiful soul that you are.</p>
+                    <p>Thank you for being my partner, my best friend, and my everything. I look forward to creating many more beautiful memories with you.</p>
+                    <p>With all my love,<br>Your [Your Name]</p>
+                    <button onclick="flipPage(2)">Next ➡️</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 2 - Photo Gallery -->
+        <div class="page" id="page2">
+            <div class="page-content">
+                <div class="photo-gallery">
+                    <div>
+                        <img src="https://via.placeholder.com/200x200?text=Our+Special+Memory+1" alt="Memory 1">
+                        <p>Remember our first date? ❤️</p>
+                    </div>
+                    <div>
+                        <img src="https://via.placeholder.com/200x200?text=Our+Special+Memory+2" alt="Memory 2">
+                        <p>You make every moment magical ✨</p>
+                    </div>
+                    <button onclick="flipPage(3)">Next ➡️</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Page -->
+        <div class="page" id="page3">
+            <div class="page-content">
+                <div class="letter">
+                    <h2>My Promise to You</h2>
+                    <p>I promise to always:</p>
+                    <ul>
+                        <li>Love you unconditionally</li>
+                        <li>Support your dreams</li>
+                        <li>Make you laugh every day</li>
+                        <li>Be your safe place</li>
+                    </ul>
+                    <p>Happy birthday my love! Let's make this year amazing together! 🎉</p>
+                    <button onclick="location.reload()">Read Again 🔄</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 0;
+        const pages = document.querySelectorAll('.page');
+        
+        function flipPage(pageNumber) {
+            if (pageNumber <= currentPage) return;
+            
+            const currentPageElem = pages[currentPage];
+            const nextPageElem = pages[pageNumber];
+            
+            currentPageElem.classList.remove('active');
+            nextPageElem.classList.add('active');
+            currentPage = pageNumber;
+            
+            // Add flip animation
+            currentPageElem.style.transform = `rotateY(-180deg)`;
+            nextPageElem.style.transform = `rotateY(0deg)`;
+        }
+
+        // Add some confetti effect
+        function addConfetti() {
+            const confettiCount = 100;
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.innerHTML = ['🎉', '🎊', '🎈', '🎁', '❤️'][Math.floor(Math.random() * 5)];
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear`;
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+
+        // Initial confetti
+        addConfetti();
+    </script>
+</body>
+  </html>
