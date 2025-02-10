@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love! ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffe6e6;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .book {
+            position: relative;
+            width: 90vw;
+            max-width: 500px;
+            height: 70vh;
+            perspective: 1500px;
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .cover {
+            background: #ff3366;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .cover h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-family: 'Pacifico', cursive;
+        }
+
+        .page.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .letter {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+
+        .photo-gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 3px solid #ff3366;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #ff3366;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        /* Confetti Animation */
+        @keyframes fall {
+            0% { transform: translateY(-10vh); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="book">
+        <!-- Cover Page -->
+        <div class="page cover active" role="button" onclick="flipPage(1)">
+            <h1>Happy Birthday, My Love! ❤️</h1>
+            <p>Click to open your special gift</p>
+            <div class="heart">🎁</div>
+        </div>
+
+        <!-- Page 1 - Letter -->
+        <div class="page" id="page1">
+            <div class="letter">
+                <h2>To My Beautiful Girlfriend,</h2>
+                <p>Happy birthday to the most amazing person in my life! 🎉</p>
+                <p>Your love fills my heart with joy.</p>
+                <p>With all my love,<br>Your [Your Name]</p>
+                <button onclick="flipPage(2)">Next ➡️</button>
+            </div>
+        </div>
+
+        <!-- Page 2 - Photo Gallery -->
+        <div class="page" id="page2">
+            <div class="photo-gallery">
+                <img src="https://via.placeholder.com/200" alt="Memory 1">
+                <img src="https://via.placeholder.com/200" alt="Memory 2">
+            </div>
+            <button onclick="flipPage(3)">Next ➡️</button>
+        </div>
+
+        <!-- Final Page -->
+        <div class="page" id="page3">
+            <div class="letter">
+                <h2>My Promise to You</h2>
+                <ul>
+                    <li>Love you unconditionally</li>
+                    <li>Support your dreams</li>
+                </ul>
+                <button onclick="location.reload()">Read Again 🔄</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 0;
+        const pages = document.querySelectorAll('.page');
+
+        function flipPage(pageNumber) {
+            if (pageNumber <= currentPage) return;
+            
+            pages[currentPage].classList.remove('active');
+            pages[currentPage].setAttribute("aria-hidden", "true");
+
+            pages[pageNumber].classList.add('active');
+            pages[pageNumber].setAttribute("aria-hidden", "false");
+
+            currentPage = pageNumber;
+        }
+
+        // Confetti Effect
+        function addConfetti() {
+            const confettiCount = 50;
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.innerHTML = ['🎉', '🎊', '🎈'][Math.floor(Math.random() * 3)];
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear`;
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+
+        addConfetti();
+    </script>
+</body>
+</html>
