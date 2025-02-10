@@ -185,6 +185,11 @@
         }
 
         addConfetti();
+
+        document.addEventListener('click', () => {
+            music.play();
+        }, { once: true });
+        
     </script>
 </body>
 </html>
